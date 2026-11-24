@@ -1,0 +1,11 @@
+{{ define "main" }}
+<header>
+  <h1>{{ site.Title }}</h1>
+  <p>{{ site.Params.description }}</p>
+  <p class="links">
+    {{- with site.Params.github }}<a href="https://github.com/{{ . }}">GitHub</a>{{ end }}
+    {{- with .OutputFormats.Get "rss" }} · <a href="{{ .RelPermalink }}">RSS</a>{{ end }}
+  </p>
+</header>
+{{ partial "posts.html" (where site.RegularPages "Section" "posts") }}
+{{ end }}

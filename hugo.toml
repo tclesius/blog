@@ -1,0 +1,18 @@
+baseURL = 'https://tclesius.github.io/blog/'
+locale = 'en-US'
+title = 'Tom Clesius'
+disableKinds = ['taxonomy', 'term']
+
+[params]
+description = 'Notes on software, hardware, and whatever else I am thinking about.'
+github = 'tclesius'
+
+[markup.highlight]
+noClasses = false
+
+[markup.goldmark.extensions.passthrough]
+enable = true
+
+[markup.goldmark.extensions.passthrough.delimiters]
+block = [['\[', '\]'], ['$$', '$$']]
+inline = [['\(', '\)'], ['$', '$']]

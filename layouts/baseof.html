@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="{{ site.Language.Locale }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }} · {{ site.Title }}{{ end }}</title>
+  <meta name="description" content="{{ or .Description site.Params.description }}">
+  {{- $css := slice (resources.Get "css/syntax.css") (resources.Get "css/main.css") | resources.Concat "css/style.css" | minify | fingerprint }}
+  <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+  {{- /* Render content before checking the flag set by the passthrough hook. */}}
+  {{- if and .Content (.Store.Get "hasMath") }}
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" crossorigin="anonymous">
+  {{- end }}
+  {{- with site.Home.OutputFormats.Get "rss" }}
+  <link rel="alternate" type="application/rss+xml" href="{{ .RelPermalink }}" title="{{ site.Title }}">
+  {{- end }}
+</head>
+<body>
+  {{- if not .IsHome }}
+  <nav><a href="{{ site.Home.RelPermalink }}">{{ site.Title }}</a></nav>
+  {{- end }}
+  <main>
+    {{- block "main" . }}{{ end }}
+  </main>
+</body>
+</html>
