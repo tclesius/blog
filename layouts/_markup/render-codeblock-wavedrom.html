@@ -1,0 +1,15 @@
+{{- $url := "https://kroki.io/wavedrom/svg" }}
+{{- $opts := dict "method" "post" "body" .Inner }}
+{{- $svg := (resources.GetRemote $url $opts).Content }}
+
+{{- $svg = $svg | replaceRE ":#000" ":currentColor" }}
+{{- $svg = $svg | replaceRE "fill:#fff;" "fill:none;" }}
+{{- $svg = $svg | replaceRE "fill:white" "fill:none" }}
+{{- $svg = $svg | replaceRE "stroke:#00F" "stroke:#e8590c" }}
+
+<figure class="wavedrom">
+  {{ $svg | safeHTML }}
+  {{- with .Attributes.caption }}
+  <figcaption>{{ . | markdownify }}</figcaption>
+  {{- end }}
+</figure>

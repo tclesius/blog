@@ -1,0 +1,10 @@
+{{- $url := "https://kroki.io/graphviz/svg" }}
+{{- $opts := dict "method" "post" "body" .Inner }}
+{{- $svg := (resources.GetRemote $url $opts).Content }}
+
+<figure class="graphviz">
+  {{ $svg | safeHTML }}
+  {{- with .Attributes.caption }}
+  <figcaption>{{ . | markdownify }}</figcaption>
+  {{- end }}
+</figure>
