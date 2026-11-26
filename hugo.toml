@@ -16,3 +16,7 @@ enable = true
 [markup.goldmark.extensions.passthrough.delimiters]
 block = [['\[', '\]'], ['$$', '$$']]
 inline = [['\(', '\)'], ['$', '$']]
+
+
+[minify]
+disableSVG = true
